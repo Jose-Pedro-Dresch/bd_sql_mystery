@@ -1,2 +1,11 @@
-# bd_sql_mystery
-Trabalho de Banco de Dados para criar um "Mistério SQL", no qual deve se utilizar técnicas da linguagem e os dados do banco para resolver a situação.
+# Mistério SQL
+Autores:
+ - José Pedro Dresch
+ - Luis Eduardo Weigert Weiss
+ - Murilo Granemann de Souza
+ - Phelipe Gabriel Lima da Silva
+ - Marco Tulio Pereira Silva
+ - Luis Teodoro Fonseca
+ - Elias Vieira Moraes
+
+## Descrição do Projeto
