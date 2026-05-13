@@ -73,6 +73,7 @@ Ele possui tabelas relacionadas a:
 ```text
 .
 ├── README.md
+├── relation_schema.png
 ├── schema.sql
 ├── inserts.sql
 ├── mystery_description.md
@@ -82,8 +83,7 @@ Ele possui tabelas relacionadas a:
 │   ├── hint3.md
 │   └── hint4.md
 └── solution/
-    ├── solution.sql
-    └── explanation.md
+    └── solution.md
 ```
 
 ---
@@ -178,95 +178,5 @@ Ao final, você deve responder:
 | Quem coordenou os comentários?          | ???      |
 | Qual empresa estava envolvida?          | ???      |
 | Quem era o mentor final?                | ???      |
-
----
-
-# Dicas
-
-Provavelmente você precisará usar:
-
-```sql
-JOIN
-GROUP BY
-HAVING
-COUNT
-ORDER BY
-subqueries
-CTEs
-```
-
----
-
-# Exemplos de Consultas Úteis
-
-## Encontrar vagas com muitas candidaturas
-
-```sql
-SELECT v.TtloVaga, COUNT(*)
-FROM VAGAEMPREGO v
-JOIN APLICAAVAGA a
-    ON v.IDVagaEmp = a.fk_VAGAEMPREGO
-GROUP BY v.TtloVaga;
-```
-
----
-
-## Encontrar contas criadas recentemente
-
-```sql
-SELECT *
-FROM CONTA
-WHERE DtCrcaoConta >= '2026-03-10';
-```
-
----
-
-## Encontrar usuários com competências iguais
-
-```sql
-SELECT p.NomPsso, c.NomeComp
-FROM POSSCOMP pc
-JOIN PESSOAL p
-    ON p.fk_CONTA = pc.fk_PESSOAL
-JOIN COMPETENCIA c
-    ON c.IDComp = pc.fk_COMPETENCIA;
-```
-
----
-
-## Encontrar usuários que comentaram e reagiram ao mesmo post
-
-```sql
-SELECT DISTINCT c.fk_CONTA
-FROM COMENTARIO c
-JOIN REAGEPOST r
-    ON c.fk_CONTA = r.fk_CONTA
-   AND c.fk_POST = r.fk_POST;
-```
-
----
-
-# Conceitos Trabalhados
-
-O desafio envolve:
-
-* modelagem relacional;
-* relacionamentos N:N;
-* auto JOIN;
-* análise temporal;
-* agregações;
-* investigação baseada em dados;
-* raciocínio lógico com SQL.
-
----
-
-# Inspirações
-
-* SQL Murder Mystery
-* Knight Lab
-* desafios investigativos em banco de dados
-* LinkedIn
-
----
 
 # Boa sorte, investigador.
