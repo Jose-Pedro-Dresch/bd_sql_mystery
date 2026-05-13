@@ -9,3 +9,4 @@ Autores:
  - Elias Vieira Moraes
 
 ## Descrição do Projeto
+Um desafio investigativo de SQL inspirado no clássico SQL Murder Mystery.
