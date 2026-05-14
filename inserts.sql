@@ -1,209 +1,8 @@
--- =========================
--- PAÍSES / ESTADOS / CIDADES
--- =========================
-
 TRUNCATE TABLE IDIOMA, COMPETENCIA, CONTA, CIDADE, ESTADO, PAIS RESTART IDENTITY CASCADE;
 
 INSERT INTO PAIS (NomPais)
-VALUES ('Brasil');
-
-INSERT INTO ESTADO (NomEstado, fk_PAIS)
-VALUES
-('Santa Catarina', 1),
-('São Paulo', 1);
-
-INSERT INTO CIDADE (NomCidade, fk_ESTADO)
-VALUES
-('Florianópolis', 1),
-('Joinville', 1),
-('São Paulo', 2);
-
--- =========================
--- CONTAS
--- =========================
-
-INSERT INTO CONTA (EmailConta, SenhaConta, DtCrcaoConta, fk_CIDADE)
-VALUES
-('ana@techlink.com', '123', '2025-01-10', 3),
-('bruno@gmail.com', '123', '2026-03-10', 1),
-('carla@gmail.com', '123', '2026-03-11', 1),
-('diego@gmail.com', '123', '2026-03-11', 1),
-('eduardo@gmail.com', '123', '2024-08-01', 2),
-('fernanda@gmail.com', '123', '2023-04-20', 3),
-('arnaldobertoldi@gmail.com', '123', '2026-03-13', 1),
-('marlonalves@gmail.com', '123', '2026-03-13', 1),
-('israelmarcelino@gmail.com', '123', '2026-03-13', 1),
-('recruiter@techlink.com', '123', '2024-02-10', 3);
-
--- =========================
--- PESSOAIS
--- =========================
-
-INSERT INTO PESSOAL (fk_CONTA, NomPsso, SobnomPsso, TtloProfPsso)
-VALUES
-(2, 'Bruno', 'Silva', 'Data Engineer'),
-(3, 'Carla', 'Mendes', 'Backend Developer'),
-(4, 'Diego', 'Souza', 'DevOps Engineer'),
-(5, 'Eduardo', 'Lima', 'Senior Recruiter'),
-(6, 'Fernanda', 'Rocha', 'Software Architect'),
-(7, 'Arnaldo', 'Bertoldi', 'Data Engineer'),
-(8, 'Marlon', 'Alves', 'Data Engineer'),
-(9, 'Israel', 'Marcelino', 'Data Engineer'),
-(10, 'Patricia', 'Almeida', 'Tech Recruiter');
-
--- =========================
--- CORPORATIVAS
--- =========================
-
-INSERT INTO CORPORATIVA (fk_CONTA, NomComerc, NumFuncEmp, DescriEmp)
-VALUES
-(1, 'TechLink Solutions', 500, 'Empresa de tecnologia especializada em dados');
-
-INSERT INTO CORPORATIVA_SETOREMP (SetorEmp, fk_CORPORATIVA)
-VALUES
-('Tecnologia', 1);
-
--- =========================
--- COMPETÊNCIAS
--- =========================
-
-INSERT INTO COMPETENCIA (NomeComp)
-VALUES
-('Python'),
-('SQL'),
-('Docker'),
-('Kubernetes'),
-('Machine Learning');
-
--- =========================
--- IDIOMAS
--- =========================
-
-INSERT INTO IDIOMA (NomeIdioma)
-VALUES
-('Português'),
-('Inglês'),
-('Espanhol'),
-('Alemão');
-
--- =========================
--- AS COMPETÊNCIAS E IDIOMAS DOS PERFILES PESSOAIS SÃO DEFINIDAS
--- NA SEÇÃO DE DADOS ADICIONAIS MAIS ABAIXO.
--- =========================
-
--- =========================
--- EXPERIÊNCIAS PROFISSIONAIS
--- =========================
-
-INSERT INTO EXPERIENCIAPROF
-(TituloExp, TipoEmpregoExp, DtInicioExp, DtFimExp, DescAtv, fk_PESSOAL, fk_CORPORATIVA)
-VALUES
-('Recruiter', 'CLT', '2024-01-01', NULL,
-'Recrutamento técnico', 5, 1),
-
-('Software Architect', 'CLT', '2023-01-01', '2026-02-20',
-'Arquitetura de sistemas distribuídos', 6, 1),
-
-('Data Engineer', 'CLT', '2025-01-01', NULL,
-'Pipelines de dados', 2, 1);
-
--- =========================
--- VAGA SUSPEITA
--- =========================
-
-INSERT INTO VAGAEMPREGO
-(TtloVaga, DescriVaga, FormatoTrabVaga, DtCrcaoVaga, fk_CORPORATIVA)
-VALUES
-('Senior Data Engineer',
-'Vaga estratégica para engenharia de dados',
-'REMOTO',
-'2026-03-14',
-1);
-
--- =========================
--- CANDIDATURAS
--- =========================
-
-INSERT INTO APLICAAVAGA
-(DtAplccao, SttusAplccao, fk_VAGAEMPREGO, fk_PESSOAL)
-VALUES
-('2026-03-14 10:00:00', 'EM_ANALISE', 1, 2),
-('2026-03-14 10:01:00', 'EM_ANALISE', 1, 3),
-('2026-03-14 10:02:00', 'EM_ANALISE', 1, 4),
-('2026-03-14 10:03:00', 'EM_ANALISE', 1, 7),
-('2026-03-14 10:04:00', 'EM_ANALISE', 1, 8),
-('2026-03-14 10:05:00', 'EM_ANALISE', 1, 9);
-
--- =========================
--- POSTS
--- =========================
-
-INSERT INTO POST
-(DtPubliPost, ConteudoPost, NivelVisib, fk_CONTA)
-VALUES
-('2026-03-14 09:00:00',
-'Estamos contratando Senior Data Engineers!',
-'PUBLICO',
-1);
-
--- =========================
--- COMENTÁRIOS COORDENADOS
--- =========================
-
-INSERT INTO COMENTARIO
-(ConteudoTxtCom, DtPubliCom, fk_POST, fk_CONTA)
-VALUES
-('Excelente oportunidade!', '2026-03-14 09:05:00', 1, 6),
-('Empresa incrível!', '2026-03-14 09:06:00', 1, 7),
-('Quero muito participar!', '2026-03-14 09:06:30', 1, 8),
-('Processo seletivo top!', '2026-03-14 09:07:00', 1, 9);
-
--- =========================
--- REAÇÕES
--- =========================
-
-INSERT INTO REAGEPOST
-(DtReacao, TipoReacao, fk_CONTA, fk_POST)
-VALUES
-('2026-03-14 09:05:00', 'LIKE', 6, 1),
-('2026-03-14 09:05:10', 'LIKE', 7, 1),
-('2026-03-14 09:05:20', 'LIKE', 8, 1),
-('2026-03-14 09:05:30', 'LIKE', 9, 1);
-
--- =========================
--- CONEXÕES
--- =========================
-
-INSERT INTO CONEXAO
-(DtEnvConv, DtAceitConv, StatusConexao, fk_PESSOAL_1, fk_PESSOAL_2)
-VALUES
-('2026-03-13 08:00:00', '2026-03-13 08:01:00', 'ACEITA', 7, 8),
-('2026-03-13 08:02:00', '2026-03-13 08:03:00', 'ACEITA', 8, 9),
-('2026-03-13 08:04:00', '2026-03-13 08:05:00', 'ACEITA', 7, 9),
-
-('2025-06-01 10:00:00', '2025-06-01 10:01:00', 'ACEITA', 5, 6),
-('2025-06-02 10:00:00', '2025-06-02 10:01:00', 'ACEITA', 2, 6),
-('2025-06-03 10:00:00', '2025-06-03 10:01:00', 'ACEITA', 5, 2);
-
--- =========================
--- FORMAÇÕES
--- =========================
-
-INSERT INTO FORMACAOACAD
-(NomInstitForm, GrauForm, AreaForm, DtInicioForm, DtFimForm, fk_PESSOAL)
-VALUES
-('UFSC', 'Bacharelado', 'Ciência da Computação',
-'2018-01-01', '2022-12-01', 2),
-
-('USP', 'Mestrado', 'Engenharia de Software',
-'2017-01-01', '2019-12-01', 6);
-
--- =========================
--- DADOS ADICIONAIS PARA ENRIQUECER O MISTÉRIO
--- =========================
-
-INSERT INTO PAIS (NomPais)
-VALUES
+VALUES 
+('Brasil'),
 ('Estados Unidos'),
 ('Canadá'),
 ('Argentina'),
@@ -215,6 +14,8 @@ VALUES
 
 INSERT INTO ESTADO (NomEstado, fk_PAIS)
 VALUES
+('Santa Catarina', 1),
+('São Paulo', 1),
 ('Acre', 1),
 ('Alagoas', 1),
 ('Amapá', 1),
@@ -243,6 +44,9 @@ VALUES
 
 INSERT INTO CIDADE (NomCidade, fk_ESTADO)
 VALUES
+('Florianópolis', 1),
+('Joinville', 1),
+('São Paulo', 2),
 ('Rio Branco', 3),
 ('Cruzeiro do Sul', 3),
 ('Maceió', 4),
@@ -295,6 +99,16 @@ VALUES
 
 INSERT INTO CONTA (EmailConta, SenhaConta, DtCrcaoConta, fk_CIDADE)
 VALUES
+('ana@techlink.com', '123', '2025-01-10', 3),
+('bruno@gmail.com', '123', '2026-03-10', 1),
+('carla@gmail.com', '123', '2026-03-11', 1),
+('diego@gmail.com', '123', '2026-03-11', 1),
+('eduardo@gmail.com', '123', '2024-08-01', 2),
+('fernanda@gmail.com', '123', '2023-04-20', 3),
+('arnaldobertoldi@gmail.com', '123', '2026-03-13', 1),
+('marlonalves@gmail.com', '123', '2026-03-13', 1),
+('israelmarcelino@gmail.com', '123', '2026-03-13', 1),
+('recruiter@techlink.com', '123', '2024-02-10', 3),
 ('thais@dataworks.com', '123', '2024-11-15', 12),
 ('lucas@greencloud.com', '123', '2024-12-01', 16),
 ('mariana@educatech.com', '123', '2025-02-20', 20),
@@ -343,6 +157,15 @@ VALUES
 
 INSERT INTO PESSOAL (fk_CONTA, NomPsso, SobnomPsso, TtloProfPsso)
 VALUES
+(2, 'Bruno', 'Silva', 'Data Engineer'),
+(3, 'Carla', 'Mendes', 'Backend Developer'),
+(4, 'Diego', 'Souza', 'DevOps Engineer'),
+(5, 'Eduardo', 'Lima', 'Senior Recruiter'),
+(6, 'Fernanda', 'Rocha', 'Software Architect'),
+(7, 'Arnaldo', 'Bertoldi', 'Data Engineer'),
+(8, 'Marlon', 'Alves', 'Data Engineer'),
+(9, 'Israel', 'Marcelino', 'Data Engineer'),
+(10, 'Patricia', 'Almeida', 'Tech Recruiter'),
 (11, 'Thais', 'Silveira', 'Product Manager'),
 (12, 'Lucas', 'Gomes', 'Full Stack Developer'),
 (13, 'Mariana', 'Costa', 'Data Scientist'),
@@ -371,6 +194,7 @@ VALUES
 
 INSERT INTO CORPORATIVA (fk_CONTA, NomComerc, NumFuncEmp, DescriEmp)
 VALUES
+(1, 'TechLink Solutions', 500, 'Empresa de tecnologia especializada em dados'),
 (36, 'DataWorks', 120, 'Empresa de análise de dados e automação'),
 (37, 'GreenCloud', 80, 'Soluções em nuvem sustentável'),
 (38, 'EducaTech', 45, 'Plataforma de educação online'),
@@ -394,6 +218,7 @@ VALUES
 
 INSERT INTO CORPORATIVA_SETOREMP (SetorEmp, fk_CORPORATIVA)
 VALUES
+('Tecnologia', 1),
 ('FinTech', 36),
 ('Cloud', 37),
 ('Educação', 38),
@@ -417,6 +242,11 @@ VALUES
 
 INSERT INTO COMPETENCIA (NomeComp)
 VALUES
+('Python'),
+('SQL'),
+('Docker'),
+('Kubernetes'),
+('Machine Learning'),
 ('Java'),
 ('JavaScript'),
 ('React'),
@@ -430,48 +260,19 @@ VALUES
 
 INSERT INTO IDIOMA (NomeIdioma)
 VALUES
+('Português'),
+('Inglês'),
+('Espanhol'),
+('Alemão'),
 ('Italiano'),
 ('Francês');
-
-INSERT INTO FORMACAOACAD
-(NomInstitForm, GrauForm, AreaForm, DtInicioForm, DtFimForm, fk_PESSOAL)
-VALUES
-('UFPR', 'Bacharelado', 'Engenharia de Software', '2019-01-01', '2023-12-01', 3),
-('UFMG', 'Bacharelado', 'Sistemas de Informação', '2018-02-01', '2022-12-01', 4),
-('PUC-Rio', 'Bacharelado', 'Comunicação Social', '2017-03-01', '2021-11-30', 5),
-('UTFPR', 'Bacharelado', 'Ciência da Computação', '2019-01-01', '2023-12-15', 7),
-('UFPE', 'Bacharelado', 'Engenharia de Software', '2018-01-15', '2022-12-01', 8),
-('UFRJ', 'Bacharelado', 'Engenharia de Computação', '2019-02-01', '2023-12-01', 9),
-('UNB', 'Bacharelado', 'Administração', '2016-01-01', '2020-12-01', 10),
-('PUC-SP', 'Mestrado', 'Ciência de Dados', '2020-01-01', '2022-12-20', 11),
-('UFBA', 'Bacharelado', 'Estatística', '2018-02-01', '2022-12-01', 12),
-('UNICAMP', 'Bacharelado', 'Design', '2017-01-01', '2021-12-01', 13),
-('UFRGS', 'Bacharelado', 'Engenharia de Produção', '2018-03-01', '2022-12-10', 14),
-('UFC', 'Bacharelado', 'Marketing', '2017-02-01', '2021-12-01', 15),
-('UFG', 'Bacharelado', 'Ciência da Computação', '2016-08-01', '2020-12-01', 16),
-('UFMS', 'Bacharelado', 'Agronomia', '2015-03-01', '2019-12-01', 17),
-('UFSCAR', 'Bacharelado', 'Engenharia Eletrônica', '2018-02-01', '2022-12-01', 18),
-('UFPA', 'Bacharelado', 'Ciência da Computação', '2019-03-01', '2023-12-01', 19),
-('UEA', 'Bacharelado', 'Ciência da Computação', '2018-02-01', '2022-12-01', 20),
-('UFPE', 'Bacharelado', 'Design Digital', '2017-01-01', '2021-12-01', 21),
-('UFCG', 'Bacharelado', 'Psicologia', '2017-01-01', '2021-12-01', 22),
-('UFRN', 'Bacharelado', 'Administração', '2016-02-01', '2020-12-01', 23),
-('UNIFESP', 'MBA', 'Gestão de Projetos', '2021-01-01', '2022-12-01', 24),
-('USP', 'Bacharelado', 'Engenharia de Produção', '2015-02-01', '2019-12-01', 25),
-('UFBA', 'Bacharelado', 'Engenharia Civil', '2015-03-01', '2019-12-01', 26),
-('UEM', 'Bacharelado', 'Gestão de TI', '2016-02-01', '2020-12-01', 27),
-('UTFPR', 'Bacharelado', 'Redes de Computadores', '2016-03-01', '2020-12-01', 28),
-('UFRJ', 'Bacharelado', 'Engenharia Elétrica', '2016-02-01', '2020-12-01', 29),
-('PUC-PR', 'Bacharelado', 'Design Gráfico', '2017-02-01', '2021-12-01', 30),
-('FATEC', 'Bacharelado', 'Jogos Digitais', '2018-03-01', '2022-12-01', 31),
-('FGV', 'Bacharelado', 'Economia', '2016-01-01', '2020-12-01', 32),
-('SENAI', 'Tecnólogo', 'Gestão Financeira', '2018-04-01', '2020-12-01', 33),
-('UNESP', 'Bacharelado', 'Psicologia Organizacional', '2017-03-01', '2021-12-01', 34),
-('UNIARA', 'Bacharelado', 'Comunicação', '2017-01-01', '2021-12-01', 35);
 
 INSERT INTO EXPERIENCIAPROF
 (TituloExp, TipoEmpregoExp, DtInicioExp, DtFimExp, DescAtv, fk_PESSOAL, fk_CORPORATIVA)
 VALUES
+('Recruiter', 'CLT', '2024-01-01', NULL,'Recrutamento técnico', 5, 1),
+('Software Architect', 'CLT', '2023-01-01', '2026-02-20','Arquitetura de sistemas distribuídos', 6, 1),
+('Data Engineer', 'CLT', '2025-01-01', NULL,'Pipelines de dados', 2, 1),
 ('Data Scientist', 'PJ', '2023-07-01', NULL, 'Modelagem preditiva e pipelines', 3, 36),
 ('Senior Developer', 'CLT', '2022-04-01', '2025-12-31', 'Desenvolvimento de aplicações web', 4, 37),
 ('Content Strategist', 'PJ', '2021-03-01', '2024-08-01', 'Campanhas digitais e posicionamento de marca', 5, 44),
@@ -508,6 +309,7 @@ VALUES
 INSERT INTO VAGAEMPREGO
 (TtloVaga, DescriVaga, FormatoTrabVaga, DtCrcaoVaga, fk_CORPORATIVA)
 VALUES
+('Senior Data Engineer','Vaga estratégica para engenharia de dados','REMOTO','2026-03-14',1),
 ('Analista de Dados', 'Análise e reports para negócios digitais', 'HÍBRIDO', '2026-02-10', 36),
 ('Engenheiro de Nuvem', 'Projeto de infraestrutura em AWS e Azure', 'REMOTO', '2026-02-12', 37),
 ('Especialista em UX', 'Melhoria da experiência do usuário em plataforma', 'HÍBRIDO', '2026-02-14', 38),
@@ -518,11 +320,27 @@ VALUES
 ('Especialista em Produtos', 'Gestão de produtos de tecnologia', 'HÍBRIDO', '2026-02-24', 36),
 ('Desenvolvedor de Jogos', 'Criação de jogos multiplataforma', 'REMOTO', '2026-02-26', 46),
 ('Analista de Energia Renovável', 'Projetos de energia inteligente', 'PRESENCIAL', '2026-02-28', 54),
-('Especialista em Dados de Saúde', 'Analytics para soluções médicas', 'REMOTO', '2026-03-05', 39);
+('Especialista em Dados de Saúde', 'Analytics para soluções médicas', 'REMOTO', '2026-03-05', 39),
+('Desenvolvedor Mobile', 'Aplicativos nativos para clientes financeiros.', 'REMOTO', '2026-03-02', 41),
+('Arquiteto de Software', 'Plataforma de integração de dados em nuvem.', 'HÍBRIDO', '2026-03-03', 37),
+('Especialista em DevOps', 'Automação de pipeline e infraestrutura.', 'REMOTO', '2026-03-04', 50),
+('Analista de Marketing de Conteúdo', 'Produção de conteúdo digital para B2B.', 'REMOTO', '2026-03-05', 44),
+('Gerente de Produto', 'Gestão de produtos digitais estratégicos.', 'HÍBRIDO', '2026-03-06', 36),
+('Engenheiro de Software de Jogos', 'Pipeline de desenvolvimento de jogos.', 'REMOTO', '2026-03-07', 46),
+('Analista de Logística', 'Planejamento de transporte urbano.', 'HÍBRIDO', '2026-03-08', 43),
+('Especialista em Saúde Digital', 'Plataforma de telemedicina e monitoramento.', 'REMOTO', '2026-03-09', 39),
+('Analista de Energia', 'Projetos de energia solar e eficiência.', 'PRESENCIAL', '2026-03-10', 54),
+('Designer de Produto', 'Design de soluções físicas e digitais.', 'HÍBRIDO', '2026-03-11', 55);
 
 INSERT INTO APLICAAVAGA
 (DtAplccao, SttusAplccao, fk_VAGAEMPREGO, fk_PESSOAL)
 VALUES
+('2026-03-14 10:00:00', 'EM_ANALISE', 1, 2),
+('2026-03-14 10:01:00', 'EM_ANALISE', 1, 3),
+('2026-03-14 10:02:00', 'EM_ANALISE', 1, 4),
+('2026-03-14 10:03:00', 'EM_ANALISE', 1, 7),
+('2026-03-14 10:04:00', 'EM_ANALISE', 1, 8),
+('2026-03-14 10:05:00', 'EM_ANALISE', 1, 9),
 ('2026-02-11 09:15:00', 'EM_ANALISE', 2, 3),
 ('2026-02-11 09:20:00', 'EM_ANALISE', 2, 12),
 ('2026-02-12 10:05:00', 'ENTREVISTA', 3, 13),
@@ -556,6 +374,7 @@ VALUES
 INSERT INTO POST
 (DtPubliPost, ConteudoPost, NivelVisib, fk_CONTA)
 VALUES
+('2026-03-14 09:00:00','Estamos contratando Senior Data Engineers!','PUBLICO',1),
 ('2026-02-10 08:00:00', 'Novo artigo sobre Cloud Sustainability.', 'PUBLICO', 37),
 ('2026-02-11 09:30:00', 'Buscamos talentos em UX para plataforma global.', 'PUBLICO', 38),
 ('2026-02-12 10:45:00', 'Junte-se ao time de segurança da informação.', 'PUBLICO', 45),
@@ -580,6 +399,10 @@ VALUES
 INSERT INTO COMENTARIO
 (ConteudoTxtCom, DtPubliCom, fk_POST, fk_CONTA)
 VALUES
+('Excelente oportunidade!', '2026-03-14 09:05:00', 1, 6),
+('Empresa incrível!', '2026-03-14 09:06:00', 1, 7),
+('Quero muito participar!', '2026-03-14 09:06:30', 1, 8),
+('Processo seletivo top!', '2026-03-14 09:07:00', 1, 9),
 ('Excelente iniciativa!', '2026-02-10 08:15:00', 2, 11),
 ('Ótimo conteúdo sobre sustentabilidade.', '2026-02-10 08:20:00', 2, 15),
 ('Tenho experiência com nuvem e posso ajudar.', '2026-02-11 09:40:00', 3, 12),
@@ -619,11 +442,35 @@ VALUES
 ('Uma boa oportunidade para designers.', '2026-02-28 19:05:00', 20, 22),
 ('A vaga parece atraente.', '2026-02-28 19:15:00', 20, 23),
 ('Acho que posso contribuir bastante.', '2026-03-01 19:35:00', 21, 24),
-('Projetos com energia são meu foco.', '2026-03-01 19:45:00', 21, 29);
+('Projetos com energia são meu foco.', '2026-03-01 19:45:00', 21, 29),
+('Gostaria de saber mais sobre as vagas.', '2026-03-02 08:10:00', 1, 14),
+('Parabéns pela iniciativa da empresa.', '2026-03-02 08:12:00', 1, 17),
+('Interessante essa oportunidade de produto.', '2026-03-03 09:05:00', 2, 16),
+('Tenho case em nuvem híbrida.', '2026-03-03 09:10:00', 2, 18),
+('Boa vaga em segurança da informação.', '2026-03-04 10:00:00', 3, 19),
+('Gostaria de participar do processo seletivo.', '2026-03-04 10:05:00', 3, 20),
+('Ótimo trabalho de marketing digital.', '2026-03-05 11:00:00', 4, 21),
+('Tenho experiência com campanhas B2B.', '2026-03-05 11:05:00', 4, 22),
+('Infraestrutura é meu foco.', '2026-03-06 12:00:00', 5, 23),
+('Excelente oportunidade em produto.', '2026-03-06 12:05:00', 5, 24),
+('Eu jogo e programo, adoraria essa vaga.', '2026-03-07 13:00:00', 6, 25),
+('Trabalhei com engines similares.', '2026-03-07 13:05:00', 6, 26),
+('Logística está em alta.', '2026-03-08 14:00:00', 7, 27),
+('Tenho experiência em cadeia de suprimentos.', '2026-03-08 14:05:00', 7, 28),
+('Vaga ótima para quem ama saúde digital.', '2026-03-09 15:00:00', 8, 29),
+('Já implementei projetos similares.', '2026-03-09 15:05:00', 8, 30),
+('Energia renovável é o futuro.', '2026-03-10 16:00:00', 9, 31),
+('Trabalho com eficiência energética.', '2026-03-10 16:05:00', 9, 32),
+('Design de produto é o que faço.', '2026-03-11 17:00:00', 10, 33),
+('Quero fazer parte dessa equipe.', '2026-03-11 17:05:00', 10, 34);
 
 INSERT INTO REAGEPOST
 (DtReacao, TipoReacao, fk_CONTA, fk_POST)
 VALUES
+('2026-03-14 09:05:00', 'LIKE', 6, 1),
+('2026-03-14 09:05:10', 'LIKE', 7, 1),
+('2026-03-14 09:05:20', 'LIKE', 8, 1),
+('2026-03-14 09:05:30', 'LIKE', 9, 1),
 ('2026-02-10 08:18:00', 'LIKE', 12, 2),
 ('2026-02-10 08:19:00', 'APOIO', 15, 2),
 ('2026-02-11 09:45:00', 'LIKE', 13, 3),
@@ -663,11 +510,49 @@ VALUES
 ('2026-02-28 19:10:00', 'LIKE', 24, 20),
 ('2026-02-28 19:11:00', 'APOIO', 25, 20),
 ('2026-03-01 19:40:00', 'LIKE', 26, 21),
-('2026-03-01 19:41:00', 'APOIO', 27, 21);
+('2026-03-01 19:41:00', 'APOIO', 27, 21),
+('2026-03-02 08:15:00', 'LIKE', 15, 1),
+('2026-03-02 08:16:00', 'APOIO', 16, 1),
+('2026-03-03 09:08:00', 'LIKE', 17, 2),
+('2026-03-03 09:09:00', 'APOIO', 18, 2),
+('2026-03-04 10:02:00', 'LIKE', 19, 3),
+('2026-03-04 10:03:00', 'APOIO', 20, 3),
+('2026-03-05 11:02:00', 'LIKE', 21, 4),
+('2026-03-05 11:03:00', 'APOIO', 22, 4),
+('2026-03-06 12:02:00', 'LIKE', 23, 5),
+('2026-03-06 12:03:00', 'APOIO', 24, 5),
+('2026-03-07 13:02:00', 'LIKE', 25, 6),
+('2026-03-07 13:03:00', 'APOIO', 26, 6),
+('2026-03-08 14:02:00', 'LIKE', 27, 7),
+('2026-03-08 14:03:00', 'APOIO', 28, 7),
+('2026-03-09 15:02:00', 'LIKE', 29, 8),
+('2026-03-09 15:03:00', 'APOIO', 30, 8),
+('2026-03-10 16:02:00', 'LIKE', 31, 9),
+('2026-03-10 16:03:00', 'APOIO', 32, 9),
+('2026-03-11 17:02:00', 'LIKE', 33, 10),
+('2026-03-11 17:03:00', 'APOIO', 34, 10),
+('2026-03-11 17:30:00', 'LIKE', 35, 10),
+('2026-03-11 17:35:00', 'APOIO', 14, 10),
+('2026-03-12 08:00:00', 'LIKE', 11, 11),
+('2026-03-12 08:05:00', 'APOIO', 12, 11),
+('2026-03-12 09:20:00', 'LIKE', 13, 12),
+('2026-03-12 09:25:00', 'APOIO', 14, 12),
+('2026-03-12 10:00:00', 'LIKE', 15, 13),
+('2026-03-12 10:05:00', 'APOIO', 16, 13),
+('2026-03-12 11:00:00', 'LIKE', 17, 14),
+('2026-03-12 11:05:00', 'APOIO', 18, 14),
+('2026-03-12 12:00:00', 'LIKE', 19, 15),
+('2026-03-12 12:05:00', 'APOIO', 20, 15);
 
 INSERT INTO CONEXAO
 (DtEnvConv, DtAceitConv, StatusConexao, fk_PESSOAL_1, fk_PESSOAL_2)
 VALUES
+('2026-03-13 08:00:00', '2026-03-13 08:01:00', 'ACEITA', 7, 8),
+('2026-03-13 08:02:00', '2026-03-13 08:03:00', 'ACEITA', 8, 9),
+('2026-03-13 08:04:00', '2026-03-13 08:05:00', 'ACEITA', 7, 9),
+('2025-06-01 10:00:00', '2025-06-01 10:01:00', 'ACEITA', 5, 6),
+('2025-06-02 10:00:00', '2025-06-02 10:01:00', 'ACEITA', 2, 6),
+('2025-06-03 10:00:00', '2025-06-03 10:01:00', 'ACEITA', 5, 2),
 ('2025-04-01 09:00:00', '2025-04-01 09:05:00', 'ACEITA', 11, 12),
 ('2025-04-02 09:00:00', '2025-04-02 09:05:00', 'ACEITA', 12, 13),
 ('2025-04-03 09:00:00', '2025-04-03 09:05:00', 'ACEITA', 13, 14),
@@ -693,6 +578,44 @@ VALUES
 ('2025-04-23 09:00:00', '2025-04-23 09:05:00', 'ACEITA', 33, 34),
 ('2025-04-24 09:00:00', '2025-04-24 09:05:00', 'ACEITA', 34, 35),
 ('2025-04-25 09:00:00', '2025-04-25 09:05:00', 'ACEITA', 2, 11);
+
+INSERT INTO FORMACAOACAD
+(NomInstitForm, GrauForm, AreaForm, DtInicioForm, DtFimForm, fk_PESSOAL)
+VALUES
+('UFSC', 'Bacharelado', 'Ciência da Computação','2018-01-01', '2022-12-01', 2),
+('USP', 'Mestrado', 'Engenharia de Software','2017-01-01', '2019-12-01', 6),
+('UFPR', 'Bacharelado', 'Engenharia de Software', '2019-01-01', '2023-12-01', 3),
+('UFMG', 'Bacharelado', 'Sistemas de Informação', '2018-02-01', '2022-12-01', 4),
+('PUC-Rio', 'Bacharelado', 'Comunicação Social', '2017-03-01', '2021-11-30', 5),
+('UTFPR', 'Bacharelado', 'Ciência da Computação', '2019-01-01', '2023-12-15', 7),
+('UFPE', 'Bacharelado', 'Engenharia de Software', '2018-01-15', '2022-12-01', 8),
+('UFRJ', 'Bacharelado', 'Engenharia de Computação', '2019-02-01', '2023-12-01', 9),
+('UNB', 'Bacharelado', 'Administração', '2016-01-01', '2020-12-01', 10),
+('PUC-SP', 'Mestrado', 'Ciência de Dados', '2020-01-01', '2022-12-20', 11),
+('UFBA', 'Bacharelado', 'Estatística', '2018-02-01', '2022-12-01', 12),
+('UNICAMP', 'Bacharelado', 'Design', '2017-01-01', '2021-12-01', 13),
+('UFRGS', 'Bacharelado', 'Engenharia de Produção', '2018-03-01', '2022-12-10', 14),
+('UFC', 'Bacharelado', 'Marketing', '2017-02-01', '2021-12-01', 15),
+('UFG', 'Bacharelado', 'Ciência da Computação', '2016-08-01', '2020-12-01', 16),
+('UFMS', 'Bacharelado', 'Agronomia', '2015-03-01', '2019-12-01', 17),
+('UFSCAR', 'Bacharelado', 'Engenharia Eletrônica', '2018-02-01', '2022-12-01', 18),
+('UFPA', 'Bacharelado', 'Ciência da Computação', '2019-03-01', '2023-12-01', 19),
+('UEA', 'Bacharelado', 'Ciência da Computação', '2018-02-01', '2022-12-01', 20),
+('UFPE', 'Bacharelado', 'Design Digital', '2017-01-01', '2021-12-01', 21),
+('UFCG', 'Bacharelado', 'Psicologia', '2017-01-01', '2021-12-01', 22),
+('UFRN', 'Bacharelado', 'Administração', '2016-02-01', '2020-12-01', 23),
+('UNIFESP', 'MBA', 'Gestão de Projetos', '2021-01-01', '2022-12-01', 24),
+('USP', 'Bacharelado', 'Engenharia de Produção', '2015-02-01', '2019-12-01', 25),
+('UFBA', 'Bacharelado', 'Engenharia Civil', '2015-03-01', '2019-12-01', 26),
+('UEM', 'Bacharelado', 'Gestão de TI', '2016-02-01', '2020-12-01', 27),
+('UTFPR', 'Bacharelado', 'Redes de Computadores', '2016-03-01', '2020-12-01', 28),
+('UFRJ', 'Bacharelado', 'Engenharia Elétrica', '2016-02-01', '2020-12-01', 29),
+('PUC-PR', 'Bacharelado', 'Design Gráfico', '2017-02-01', '2021-12-01', 30),
+('FATEC', 'Bacharelado', 'Jogos Digitais', '2018-03-01', '2022-12-01', 31),
+('FGV', 'Bacharelado', 'Economia', '2016-01-01', '2020-12-01', 32),
+('SENAI', 'Tecnólogo', 'Gestão Financeira', '2018-04-01', '2020-12-01', 33),
+('UNESP', 'Bacharelado', 'Psicologia Organizacional', '2017-03-01', '2021-12-01', 34),
+('UNIARA', 'Bacharelado', 'Comunicação', '2017-01-01', '2021-12-01', 35);
 
 INSERT INTO POSSCOMP (fk_COMPETENCIA, fk_PESSOAL)
 VALUES
@@ -817,77 +740,3 @@ VALUES
 (5, 18),
 (1, 19),
 (4, 20);
-
-INSERT INTO VAGAEMPREGO
-(TtloVaga, DescriVaga, FormatoTrabVaga, DtCrcaoVaga, fk_CORPORATIVA)
-VALUES
-('Desenvolvedor Mobile', 'Aplicativos nativos para clientes financeiros.', 'REMOTO', '2026-03-02', 41),
-('Arquiteto de Software', 'Plataforma de integração de dados em nuvem.', 'HÍBRIDO', '2026-03-03', 37),
-('Especialista em DevOps', 'Automação de pipeline e infraestrutura.', 'REMOTO', '2026-03-04', 50),
-('Analista de Marketing de Conteúdo', 'Produção de conteúdo digital para B2B.', 'REMOTO', '2026-03-05', 44),
-('Gerente de Produto', 'Gestão de produtos digitais estratégicos.', 'HÍBRIDO', '2026-03-06', 36),
-('Engenheiro de Software de Jogos', 'Pipeline de desenvolvimento de jogos.', 'REMOTO', '2026-03-07', 46),
-('Analista de Logística', 'Planejamento de transporte urbano.', 'HÍBRIDO', '2026-03-08', 43),
-('Especialista em Saúde Digital', 'Plataforma de telemedicina e monitoramento.', 'REMOTO', '2026-03-09', 39),
-('Analista de Energia', 'Projetos de energia solar e eficiência.', 'PRESENCIAL', '2026-03-10', 54),
-('Designer de Produto', 'Design de soluções físicas e digitais.', 'HÍBRIDO', '2026-03-11', 55);
-
-INSERT INTO COMENTARIO
-(ConteudoTxtCom, DtPubliCom, fk_POST, fk_CONTA)
-VALUES
-('Gostaria de saber mais sobre as vagas.', '2026-03-02 08:10:00', 1, 14),
-('Parabéns pela iniciativa da empresa.', '2026-03-02 08:12:00', 1, 17),
-('Interessante essa oportunidade de produto.', '2026-03-03 09:05:00', 2, 16),
-('Tenho case em nuvem híbrida.', '2026-03-03 09:10:00', 2, 18),
-('Boa vaga em segurança da informação.', '2026-03-04 10:00:00', 3, 19),
-('Gostaria de participar do processo seletivo.', '2026-03-04 10:05:00', 3, 20),
-('Ótimo trabalho de marketing digital.', '2026-03-05 11:00:00', 4, 21),
-('Tenho experiência com campanhas B2B.', '2026-03-05 11:05:00', 4, 22),
-('Infraestrutura é meu foco.', '2026-03-06 12:00:00', 5, 23),
-('Excelente oportunidade em produto.', '2026-03-06 12:05:00', 5, 24),
-('Eu jogo e programo, adoraria essa vaga.', '2026-03-07 13:00:00', 6, 25),
-('Trabalhei com engines similares.', '2026-03-07 13:05:00', 6, 26),
-('Logística está em alta.', '2026-03-08 14:00:00', 7, 27),
-('Tenho experiência em cadeia de suprimentos.', '2026-03-08 14:05:00', 7, 28),
-('Vaga ótima para quem ama saúde digital.', '2026-03-09 15:00:00', 8, 29),
-('Já implementei projetos similares.', '2026-03-09 15:05:00', 8, 30),
-('Energia renovável é o futuro.', '2026-03-10 16:00:00', 9, 31),
-('Trabalho com eficiência energética.', '2026-03-10 16:05:00', 9, 32),
-('Design de produto é o que faço.', '2026-03-11 17:00:00', 10, 33),
-('Quero fazer parte dessa equipe.', '2026-03-11 17:05:00', 10, 34);
-
-INSERT INTO REAGEPOST
-(DtReacao, TipoReacao, fk_CONTA, fk_POST)
-VALUES
-('2026-03-02 08:15:00', 'LIKE', 15, 1),
-('2026-03-02 08:16:00', 'APOIO', 16, 1),
-('2026-03-03 09:08:00', 'LIKE', 17, 2),
-('2026-03-03 09:09:00', 'APOIO', 18, 2),
-('2026-03-04 10:02:00', 'LIKE', 19, 3),
-('2026-03-04 10:03:00', 'APOIO', 20, 3),
-('2026-03-05 11:02:00', 'LIKE', 21, 4),
-('2026-03-05 11:03:00', 'APOIO', 22, 4),
-('2026-03-06 12:02:00', 'LIKE', 23, 5),
-('2026-03-06 12:03:00', 'APOIO', 24, 5),
-('2026-03-07 13:02:00', 'LIKE', 25, 6),
-('2026-03-07 13:03:00', 'APOIO', 26, 6),
-('2026-03-08 14:02:00', 'LIKE', 27, 7),
-('2026-03-08 14:03:00', 'APOIO', 28, 7),
-('2026-03-09 15:02:00', 'LIKE', 29, 8),
-('2026-03-09 15:03:00', 'APOIO', 30, 8),
-('2026-03-10 16:02:00', 'LIKE', 31, 9),
-('2026-03-10 16:03:00', 'APOIO', 32, 9),
-('2026-03-11 17:02:00', 'LIKE', 33, 10),
-('2026-03-11 17:03:00', 'APOIO', 34, 10),
-('2026-03-11 17:30:00', 'LIKE', 35, 10),
-('2026-03-11 17:35:00', 'APOIO', 14, 10),
-('2026-03-12 08:00:00', 'LIKE', 11, 11),
-('2026-03-12 08:05:00', 'APOIO', 12, 11),
-('2026-03-12 09:20:00', 'LIKE', 13, 12),
-('2026-03-12 09:25:00', 'APOIO', 14, 12),
-('2026-03-12 10:00:00', 'LIKE', 15, 13),
-('2026-03-12 10:05:00', 'APOIO', 16, 13),
-('2026-03-12 11:00:00', 'LIKE', 17, 14),
-('2026-03-12 11:05:00', 'APOIO', 18, 14),
-('2026-03-12 12:00:00', 'LIKE', 19, 15),
-('2026-03-12 12:05:00', 'APOIO', 20, 15);
