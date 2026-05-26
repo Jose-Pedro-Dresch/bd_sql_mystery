@@ -12,7 +12,7 @@ VALUES
 ('Japão'),
 ('Austrália');
 
-INSERT INTO ESTADO (NomEstado, fk_PAIS)
+INSERT INTO ESTADO (NomEstado, IDPais)
 VALUES
 ('Santa Catarina', 1),
 ('São Paulo', 1),
@@ -42,7 +42,7 @@ VALUES
 ('Sergipe', 1),
 ('Tocantins', 1);
 
-INSERT INTO CIDADE (NomCidade, fk_ESTADO)
+INSERT INTO CIDADE (NomCidade, IDEstado)
 VALUES
 ('Florianópolis', 1),
 ('Joinville', 1),
@@ -97,7 +97,7 @@ VALUES
 ('Palmas', 27),
 ('Araguaína', 27);
 
-INSERT INTO CONTA (EmailConta, SenhaConta, DtCrcaoConta, fk_CIDADE)
+INSERT INTO CONTA (EmailConta, SenhaConta, DtCrcaoConta, IDCidade)
 VALUES
 ('ana@techlink.com', '123', '2025-01-10', 3),
 ('bruno@gmail.com', '123', '2026-03-10', 1),
@@ -155,7 +155,7 @@ VALUES
 ('henrique2@mobihub.com', '123', '2026-03-13', 51),
 ('patricia2@smartlog.com', '123', '2026-03-13', 52);
 
-INSERT INTO PESSOAL (fk_CONTA, NomPsso, SobnomPsso, TtloProfPsso)
+INSERT INTO PESSOAL (IDConta, NomPsso, SobnomPsso, TtloProfPsso)
 VALUES
 (2, 'Bruno', 'Silva', 'Data Engineer'),
 (3, 'Carla', 'Mendes', 'Backend Developer'),
@@ -192,7 +192,7 @@ VALUES
 (34, 'Bruno', 'Nunes', 'Logistics Manager'),
 (35, 'Maria', 'Moura', 'Customer Success Lead');
 
-INSERT INTO CORPORATIVA (fk_CONTA, NomComerc, NumFuncEmp, DescriEmp)
+INSERT INTO CORPORATIVA (IDConta, NomComerc, NumFuncEmp, DescriEmp)
 VALUES
 (1, 'TechLink Solutions', 500, 'Empresa de tecnologia especializada em dados'),
 (36, 'DataWorks', 120, 'Empresa de análise de dados e automação'),
@@ -216,7 +216,7 @@ VALUES
 (54, 'EnergyGrid', 100, 'Energia renovável e smart grids'),
 (55, 'DesignMind', 30, 'Estúdio de design e inovação');
 
-INSERT INTO CORPORATIVA_SETOREMP (SetorEmp, fk_CORPORATIVA)
+INSERT INTO CORPORATIVA_SETOREMP (SetorEmp, IDEmp)
 VALUES
 ('Tecnologia', 1),
 ('FinTech', 36),
@@ -268,7 +268,7 @@ VALUES
 ('Francês');
 
 INSERT INTO EXPERIENCIAPROF
-(TituloExp, TipoEmpregoExp, DtInicioExp, DtFimExp, DescAtv, fk_PESSOAL, fk_CORPORATIVA)
+(TituloExp, TipoEmpregoExp, DtInicioExp, DtFimExp, DescAtv, IDConta, IDEmp)
 VALUES
 ('Recruiter', 'CLT', '2024-01-01', NULL,'Recrutamento técnico', 5, 1),
 ('Software Architect', 'CLT', '2023-01-01', '2026-02-20','Arquitetura de sistemas distribuídos', 6, 1),
@@ -307,7 +307,7 @@ VALUES
 ('Customer Success Analyst', 'PJ', '2023-10-01', NULL, 'Relacionamento com clientes e retenção', 35, 41);
 
 INSERT INTO VAGAEMPREGO
-(TtloVaga, DescriVaga, FormatoTrabVaga, DtCrcaoVaga, fk_CORPORATIVA)
+(TtloVaga, DescriVaga, FormatoTrabVaga, DtCrcaoVaga, IDEmp)
 VALUES
 ('Senior Data Engineer','Vaga estratégica para engenharia de dados','REMOTO','2026-03-14',1),
 ('Analista de Dados', 'Análise e reports para negócios digitais', 'HÍBRIDO', '2026-02-10', 36),
@@ -333,7 +333,7 @@ VALUES
 ('Designer de Produto', 'Design de soluções físicas e digitais.', 'HÍBRIDO', '2026-03-11', 55);
 
 INSERT INTO APLICAAVAGA
-(DtAplccao, SttusAplccao, fk_VAGAEMPREGO, fk_PESSOAL)
+(DtAplccao, SttusAplccao, IDVagaEmp, IDConta)
 VALUES
 ('2026-03-14 10:00:00', 'EM_ANALISE', 1, 2),
 ('2026-03-14 10:01:00', 'EM_ANALISE', 1, 3),
@@ -372,7 +372,7 @@ VALUES
 ('2026-02-24 09:35:00', 'EM_ANALISE', 3, 35);
 
 INSERT INTO POST
-(DtPubliPost, ConteudoPost, NivelVisib, fk_CONTA)
+(DtPubliPost, ConteudoPost, NivelVisib, IDConta)
 VALUES
 ('2026-03-14 09:00:00','Estamos contratando Senior Data Engineers!','PUBLICO',1),
 ('2026-02-10 08:00:00', 'Novo artigo sobre Cloud Sustainability.', 'PUBLICO', 37),
@@ -397,7 +397,7 @@ VALUES
 ('2026-03-01 19:30:00', 'Time de energia inteligente contrata.', 'PUBLICO', 54);
 
 INSERT INTO COMENTARIO
-(ConteudoTxtCom, DtPubliCom, fk_POST, fk_CONTA)
+(ConteudoTxtCom, DtPubliCom, IDPost, IDConta)
 VALUES
 ('Excelente oportunidade!', '2026-03-14 09:05:00', 1, 6),
 ('Empresa incrível!', '2026-03-14 09:06:00', 1, 7),
@@ -465,7 +465,7 @@ VALUES
 ('Quero fazer parte dessa equipe.', '2026-03-11 17:05:00', 10, 34);
 
 INSERT INTO REAGEPOST
-(DtReacao, TipoReacao, fk_CONTA, fk_POST)
+(DtReacao, TipoReacao, IDConta, IDPost)
 VALUES
 ('2026-03-14 09:05:00', 'LIKE', 6, 1),
 ('2026-03-14 09:05:10', 'LIKE', 7, 1),
@@ -545,7 +545,7 @@ VALUES
 ('2026-03-12 12:05:00', 'APOIO', 20, 15);
 
 INSERT INTO CONEXAO
-(DtEnvConv, DtAceitConv, StatusConexao, fk_PESSOAL_1, fk_PESSOAL_2)
+(DtEnvConv, DtAceitConv, StatusConexao, IDConta_1, IDConta_2)
 VALUES
 ('2026-03-13 08:00:00', '2026-03-13 08:01:00', 'ACEITA', 7, 8),
 ('2026-03-13 08:02:00', '2026-03-13 08:03:00', 'ACEITA', 8, 9),
@@ -580,7 +580,7 @@ VALUES
 ('2025-04-25 09:00:00', '2025-04-25 09:05:00', 'ACEITA', 2, 11);
 
 INSERT INTO FORMACAOACAD
-(NomInstitForm, GrauForm, AreaForm, DtInicioForm, DtFimForm, fk_PESSOAL)
+(NomInstitForm, GrauForm, AreaForm, DtInicioForm, DtFimForm, IDConta)
 VALUES
 ('UFSC', 'Bacharelado', 'Ciência da Computação','2018-01-01', '2022-12-01', 2),
 ('USP', 'Mestrado', 'Engenharia de Software','2017-01-01', '2019-12-01', 6),
@@ -617,7 +617,7 @@ VALUES
 ('UNESP', 'Bacharelado', 'Psicologia Organizacional', '2017-03-01', '2021-12-01', 34),
 ('UNIARA', 'Bacharelado', 'Comunicação', '2017-01-01', '2021-12-01', 35);
 
-INSERT INTO POSSCOMP (fk_COMPETENCIA, fk_PESSOAL)
+INSERT INTO POSSCOMP (IDComp, IDConta)
 VALUES
 (1, 7), (2, 7), (3, 7),
 (1, 8), (2, 8), (3, 8),
@@ -652,7 +652,7 @@ VALUES
 (3, 34), (6, 34),
 (4, 35), (9, 35);
 
-INSERT INTO FALAIDIOM (NvlProfic, fk_IDIOMA, fk_PESSOAL)
+INSERT INTO FALAIDIOM (NvlProfic, IDIdioma, IDConta)
 VALUES
 ('Nativo', 1, 6),
 ('Avançado', 2, 6),
@@ -695,7 +695,7 @@ VALUES
 ('Básico', 4, 34),
 ('Avançado', 5, 35);
 
-INSERT INTO FORMPOSSCOMP (fk_COMPETENCIA, fk_FORMACAOACAD)
+INSERT INTO FORMPOSSCOMP (IDComp, IDForm)
 VALUES
 (1, 1),
 (2, 2),
@@ -718,7 +718,7 @@ VALUES
 (9, 19),
 (10, 20);
 
-INSERT INTO EXPPOSSCOMP (fk_COMPETENCIA, fk_EXPERIENCIAPROF)
+INSERT INTO EXPPOSSCOMP (IDComp, IDExp)
 VALUES
 (2, 1),
 (6, 2),
