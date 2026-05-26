@@ -216,7 +216,7 @@ VALUES
 (54, 'EnergyGrid', 100, 'Energia renovável e smart grids'),
 (55, 'DesignMind', 30, 'Estúdio de design e inovação');
 
-INSERT INTO CORPORATIVA_SETOREMP (SetorEmp, IDEmp)
+INSERT INTO CORPORATIVA_SETOREMP (SetorEmp, IDConta)
 VALUES
 ('Tecnologia', 1),
 ('FinTech', 36),
@@ -307,7 +307,7 @@ VALUES
 ('Customer Success Analyst', 'PJ', '2023-10-01', NULL, 'Relacionamento com clientes e retenção', 35, 41);
 
 INSERT INTO VAGAEMPREGO
-(TtloVaga, DescriVaga, FormatoTrabVaga, DtCrcaoVaga, IDEmp)
+(TtloVaga, DescriVaga, FormatoTrabVaga, DtCrcaoVaga, IDConta)
 VALUES
 ('Senior Data Engineer','Vaga estratégica para engenharia de dados','REMOTO','2026-03-14',1),
 ('Analista de Dados', 'Análise e reports para negócios digitais', 'HÍBRIDO', '2026-02-10', 36),
